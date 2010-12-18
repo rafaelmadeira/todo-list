@@ -65,8 +65,21 @@ class User
   property :password,   BCryptHash, :required => true, :length => 255
   property :created_at, DateTime
 
+  has n, :tasks
 end
 
+class Task
+  include DataMapper::Resource
+
+  property :id,           Serial
+  property :username_id,  Integer,  :key => true, :min => 1
+  property :body,         Text,     :required => true
+  property :release_date, DateTime, :default => 'null'
+  property :created_at,   DateTime
+  property :status,       Boolean,  :default => false
+
+  belongs_to :user
+end
 # Finalize the database and create the database tables if needed
 DataMapper.finalize
 DataMapper.auto_upgrade!
@@ -109,14 +122,10 @@ post '/login/?' do
   end
 end
 
-get '/:id' do |id|
+get '/todo' do
   if logged_in?
-    user = User.first(:id => id)
-    if user.nil?
-      erb :notfound
-    else
-      erb :todo
-    end
+    user = User.first(:id => get_userid)
+    erb :todo
   else
     erb :login
   end

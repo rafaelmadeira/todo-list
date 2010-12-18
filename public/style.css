@@ -1,39 +1,132 @@
 body {
-    color: #000000;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 14px;
-	margin: 10px 20px 10px 20px;
+	background: #F2F1EA;
+	font-size: 18px;
+	line-height: 32px;
+	font-family: Arial;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+#wrapper {
+	margin: 60px auto 40px auto;
+	-moz-box-shadow: 0 0 12px #bbb;
+	background: #fff;
+	border: 1px solid #555;
+	padding: 20px;
+	width: 700px;
 }
 
-h1 { font-size: 2.5em; }
-h2 { font-size: 2em; }
-h3 { font-size: 1.75em; }
-h4 { font-size: 1.5em; }
-h5 { font-size: 1.25em; }
-h6 { font-size: 1em; }
-
-p {
-    padding: 10px 0 10px 0;
+h1 {
+	text-align: center;
+	margin: 12px 0 40px 0;
 }
 
-ol, ul {
-    padding: 10px 0 10px 20px;
+ul.tasks {
+	padding: 0;
+	margin: 0;
+	list-style: none;
 }
 
-li {
-    padding: 2px 0 2px 0;
+ul.tasks li {
+	margin: 0;
+	padding: 6px 0;
+	border-bottom: 1px dotted #ccc;
 }
 
-a {
-    color: #000000;
-    text-decoration: underline;
+ul.tasks li:hover {
+	background: #f5f5f5;
 }
 
-a:hover {
-    color: #555555;
-    text-decoration: underline;
+ul.tasks span {
+	display: block;
+	width: 100px;
+	color: #bbb;
+	float: right;
 }
+
+.strike {
+	text-decoration: line-through;
+	color: #aaa;
+}
+
+#add-task {
+	overflow: hidden;
+	margin: 0 0 20px 0;
+}
+
+#add-task input.add {
+	width: 392px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #ccc;
+	-moz-border-radius: 4px;
+	padding: 2px 4px;
+	font-family: Arial;
+	font-size: 18px;
+	color: #555;
+	float: left;
+}
+
+#add-task input.task-date {
+	width: 96px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid #ccc;
+	-moz-border-radius: 4px;
+	padding: 2px 4px;
+	font-family: Arial;
+	font-size: 18px;
+	color: #555;
+	float: left;
+	margin: 0 0 0 20px;
+}
+
+#add-task input:focus { border: 1px solid #aaa; }
+
+#add-task span {
+	border: 1px solid #ccc;
+	-moz-border-radius: 4px;
+	height: 28px;
+	line-height: 28px;
+	float: right;
+	padding: 2px 8px;
+	background: #0099CC;
+	color: #fff;
+	margin: 0 0 0 10px;
+	cursor: pointer;
+	text-shadow: 1px 1px 1px #333;
+}
+
+#add-task span:hover { background: #00AFEA; }
+
+#error {
+	padding: 4px 10px;
+	margin: 0 0 20px 0;
+	border: 1px solid #d00000;
+	background: #F8F1F1;
+	color: #a00000;
+	display: none;
+}
+
+a.dp-choose-date {
+	float: left;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	margin: 5px 3px 0;
+	display: block;
+	text-indent: -2000px;
+	overflow: hidden;
+	background: url(calendar.png) no-repeat; 
+}
+
+ul.tasks li i {
+	float: right;
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin: 12px 0 0 0;
+	background: url(delete.png) no-repeat;
+	cursor: pointer;
+	visibility: hidden;
+}
+
+.delete { visibility: visible !important; }
