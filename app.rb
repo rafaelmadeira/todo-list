@@ -94,7 +94,7 @@ get '/' do
     user = User.first(:id => get_userid)
     erb :todo
   else
-    erb :login
+    redirect '/login'
   end
 end
 
@@ -123,6 +123,19 @@ post '/login/?' do
     end
   else
     flash[:notice] = 'Incorrect username.'
+    redirect '/login'
+  end
+end
+
+post '/task/new' do
+  if logged_in?
+    user = User.first(:id => get_userid)
+    task = Task.create(:username_id => user.id, :body => params[:body], :release_date => params[:release_date])
+    unless task.saved?
+      flash[:notice] = 'Task adding failed'
+      redirect '/'
+    end
+  else
     redirect '/login'
   end
 end
