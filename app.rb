@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'sinatra'
-#require 'pg'
+require 'pg' if :environment == :production
 require 'dm-core'
-#require 'dm-postgres-adapter'
+require 'dm-postgres-adapter' if :environment == :production
 require 'dm-migrations'
 require 'dm-validations'
 require 'dm-timestamps'
@@ -106,6 +106,19 @@ post '/login/?' do
   else
     flash[:notice] = 'Incorrect username.'
     redirect '/login'
+  end
+end
+
+get '/:id' do |id|
+  if logged_in?
+    user = User.first(:id => id)
+    if user.nil?
+      erb :notfound
+    else
+      erb :todo
+    end
+  else
+    erb :login
   end
 end
 

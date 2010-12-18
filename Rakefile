@@ -1,4 +1,6 @@
-requre 'app'
+#require 'app'
+require ::File.expand_path('../app', __FILE__)
+
 
 desc 'Migrate DataMapper database'
 task :migrate do
@@ -7,5 +9,5 @@ end
 
 desc 'Set password for users'
 task :password do
-  User.create(:name => 'wtf', :password => 'test')
+  User.create(:username => 'wtf', :password => 'test')
 end
