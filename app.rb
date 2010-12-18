@@ -90,7 +90,7 @@ DataMapper.auto_upgrade!
 # Show an index page
 get '/' do
   if logged_in?
-    user = User.first(:id => get_userid)
+    #user = User.first(:id => get_userid)
     erb :todo
   else
     redirect '/login'
