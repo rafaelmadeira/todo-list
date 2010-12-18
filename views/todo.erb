@@ -1,0 +1,64 @@
+    <script type="text/javascript">
+      function check() {
+              $('ul.tasks input:checked').ready(function() {
+                      $('ul.tasks input:checked').next().addClass('strike');
+              });
+              $('ul.tasks input').click(function() {
+                      $(this).next().addClass('strike');
+                      if (!$(this).attr('checked')) {
+                              $(this).next().removeClass('strike');
+                      }
+          });
+              $('ul.tasks i').click(function() {
+              $(this).parent().remove();
+      });
+      $('ul.tasks li').hover(function(e) {
+            e.preventDefault();
+            $(this).find('i').addClass('delete');
+          }, function(e){
+                  e.preventDefault();
+                      $(this).find('i').removeClass('delete');
+              });
+      }
+	
+      $(function() {
+              $('.date-pick').datePicker().val(new Date().asString()).trigger('change');
+              var task = '<li><input type="checkbox" class="test" /> <em></em> <i></i><span></span></li>';
+                      $('span.new-task').click(function() {
+                              if ($(this).prev().prev().prev().val() == '') {
+                                      $('#error').fadeIn(200);
+                                      return false;
+                              }
+                              $('#error').hide();
+                              $('ul.tasks').prepend(task);
+                              $('ul.tasks li:first span').html($(this).prev().prev().val());
+                              $('ul.tasks li:first em').html($(this).prev().prev().prev().val());
+                              $(this).prev().prev().prev().val('');
+                              check();
+                  });
+              check();
+          });
+    </script>
+	
+	<div id="wrapper">
+		<h1><img src="todo.png" alt="TO DO LIST:" /></h1>
+		<div id="add-task">
+			<input type="text" value="" class="add" /> <input type="text" value="" class="date-pick task-date" /> <span class="new-task">Add new task</span>
+		</div>
+		<div id="error">Please, enter the text of your task.</div>
+		
+		<ul class="tasks">
+			<li>
+				<input type="checkbox" /> <em>Содзать крутой сайт</em> <i></i> <span>20-12-2010</span> 
+			</li>
+			<li>
+				<input type="checkbox" /> <em>Подготовиться к Новому Году</em> <i></i> <span>19-12-2010</span>
+			</li>
+			<li>
+				<input type="checkbox" /> <em>Заработать миллион</em> <i></i> <span>19-12-2010</span>
+			</li>
+		</ul>
+	</div>
+        <div id="logout">
+          <p>You are logged in. You may <a href="/login">log out</a></p>
+        </div>

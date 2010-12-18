@@ -90,7 +90,12 @@ DataMapper.auto_upgrade!
 
 # Show an index page
 get '/' do
-  erb :index
+  if logged_in?
+    user = User.first(:id => get_userid)
+    erb :todo
+  else
+    erb :login
+  end
 end
 
 # Show a login form or log the user out
@@ -119,15 +124,6 @@ post '/login/?' do
   else
     flash[:notice] = 'Incorrect username.'
     redirect '/login'
-  end
-end
-
-get '/todo' do
-  if logged_in?
-    user = User.first(:id => get_userid)
-    erb :todo
-  else
-    erb :login
   end
 end
 

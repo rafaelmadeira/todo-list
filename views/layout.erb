@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title><%= "#{@title} &mdash; " if @title %>Sinatra App</title>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="icon.png" />
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="style.css" />
+    <title><%= "#{@title} &mdash; " if @title %>To Do List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" media="screen" rel="stylesheet" href="reset.css" />
+    <link type="text/css" media="screen" rel="stylesheet" href="style.css" />
+    <link type="text/css" media="screen" rel="stylesheet" href="datePicker.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="date.js"></script>
+    <script type="text/javascript" src="jquery.datePicker.js"></script>
 </head>
 <body>
     <% if flash[:notice] %>
