@@ -9,5 +9,5 @@ end
 
 desc 'Set password for users'
 task :password do
-  User.create(:username => 'wtf', :password => 'test')
+  User.create(:username => 'test', :password => 'test')
 end
