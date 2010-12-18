@@ -1,0 +1,13 @@
+## About
+
+I hate writing boilerplate code, and since I couldn't find any good templates
+for getting a basic Sinatra app running, I decided to make my own.
+
+The Sinatra/DataMapper template includes basic code to set up a database, a
+simple user login system, a little bit of HTML/CSS, and other things that I
+usually include in my Sinatra apps.
+
+## License
+
+Everything here is in the public domain, so do whatever you want with it! Also,
+feel free to fork this on GitHub to help improve it.
