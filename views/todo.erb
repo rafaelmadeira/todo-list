@@ -29,6 +29,7 @@
                                       $('#error').fadeIn(200);
                                       return false;
                               }
+                              $.post("task/new",  { body: $(this).prev().prev().prev().val() } );
                               $('#error').hide();
                               $('ul.tasks').prepend(task);
                               $('ul.tasks li:first span').html($(this).prev().prev().val());
@@ -48,15 +49,12 @@
 		<div id="error">Please, enter the text of your task.</div>
 		
 		<ul class="tasks">
-			<li>
-				<input type="checkbox" /> <em>Содзать крутой сайт</em> <i></i> <span>20-12-2010</span> 
-			</li>
-			<li>
-				<input type="checkbox" /> <em>Подготовиться к Новому Году</em> <i></i> <span>19-12-2010</span>
-			</li>
-			<li>
-				<input type="checkbox" /> <em>Заработать миллион</em> <i></i> <span>19-12-2010</span>
-			</li>
+                  <% user =User.first(:id => get_userid) %>
+                  <% user.tasks.each do |task| %>
+                    <li>
+                      <input type="checkbox" /> <em><%= task.body %></em> <i></i> <span></span> 
+                    </li>
+                  <% end %>
 		</ul>
 	</div>
         <div id="logout">

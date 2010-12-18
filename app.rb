@@ -72,9 +72,8 @@ class Task
   include DataMapper::Resource
 
   property :id,           Serial
-  property :username_id,  Integer,  :key => true, :min => 1
   property :body,         Text,     :required => true
-  property :release_date, DateTime, :default => 'null'
+  #property :release_date, DateTime
   property :created_at,   DateTime
   property :status,       Boolean,  :default => false
 
@@ -130,11 +129,8 @@ end
 post '/task/new' do
   if logged_in?
     user = User.first(:id => get_userid)
-    task = Task.create(:username_id => user.id, :body => params[:body], :release_date => params[:release_date])
-    unless task.saved?
-      flash[:notice] = 'Task adding failed'
-      redirect '/'
-    end
+    task = Task.create(:user_id => user.id, :body => params[:body])
+    #add false
   else
     redirect '/login'
   end
