@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'sinatra'
-require 'pg'
+#require 'pg'
 require 'dm-core'
-require 'dm-postgres-adapter'
+#require 'dm-postgres-adapter'
 require 'dm-migrations'
 require 'dm-validations'
 require 'dm-timestamps'
@@ -51,6 +51,7 @@ end
 # Database Setup
 # ==============
 
+DataMapper::Logger.new($stdout, :debug)
 # Set up the database connection
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
 
