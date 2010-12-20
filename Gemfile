@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'sinatra'
+gem 'sinatra', '1.1'
 gem 'heroku'
 gem 'dm-core'
 gem 'dm-migrations'
