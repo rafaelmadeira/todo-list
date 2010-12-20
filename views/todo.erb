@@ -30,7 +30,9 @@
                                       return false;
                               }
                               release = $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 }).val();
-                              $.post("task/new",  { body: $(this).prev().prev().val(), release_date.strftime("%Y-%m-%d"): release });
+                              $.post("task/new",  { body: $(this).prev().prev().val(), 
+                                                    /*release_date.strftime("%Y-%m-%d"): release,*/
+                                                    status: true });
                               $('#error').hide();
                               $('ul.tasks').prepend(task);
                               $('ul.tasks li:first span').html($(this).prev().val());
@@ -55,8 +57,8 @@
                   <% user =User.first(:id => get_userid) %>
                   <% user.tasks.reverse_each do |task| %>
                     <li>
-                      <input type="checkbox" /> <em><%= task.body %></em> <i></i>
-                      <span><%= task.release_date.strftime("%Y-%m-%d") %></span> 
+                      <input type="checkbox" <% if task.status == true %>checked="checked"<% end %> /> <em><%= task.body %></em> <i></i>
+                      <span><%= task.status %></span> 
                     </li>
                   <% end %>
 		</ul>
