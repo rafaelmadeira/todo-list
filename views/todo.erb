@@ -22,19 +22,20 @@
       }
 	
       $(function() {
-              $('.date-pick').datePicker().val(new Date().asString()).trigger('change');
+              $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
               var task = '<li><input type="checkbox" class="test" /> <em></em> <i></i><span></span></li>';
                       $('span.new-task').click(function() {
-                              if ($(this).prev().prev().prev().val() == '') {
+                              if ($(this).prev().prev().val() == '') {
                                       $('#error').fadeIn(200);
                                       return false;
                               }
-                              $.post("task/new",  { body: $(this).prev().prev().prev().val() } );
+                              release = $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 }).val();
+                              $.post("task/new",  { body: $(this).prev().prev().val(), release_date.strftime("%Y-%m-%d"): release });
                               $('#error').hide();
                               $('ul.tasks').prepend(task);
-                              $('ul.tasks li:first span').html($(this).prev().prev().val());
-                              $('ul.tasks li:first em').html($(this).prev().prev().prev().val());
-                              $(this).prev().prev().prev().val('');
+                              $('ul.tasks li:first span').html($(this).prev().val());
+                              $('ul.tasks li:first em').html($(this).prev().prev().val());
+                              $(this).prev().prev().val('');
                               check();
                   });
               check();
@@ -44,15 +45,18 @@
 	<div id="wrapper">
 		<h1><img src="todo.png" alt="TO DO LIST:" /></h1>
 		<div id="add-task">
-			<input type="text" value="" class="add" /> <input type="text" value="" class="date-pick task-date" /> <span class="new-task">Add new task</span>
+			<input type="text" value="" class="add" />
+			<input type="text" value="" class="date-pick task-date" />
+			<span class="new-task">Add new task</span>
 		</div>
 		<div id="error">Please, enter the text of your task.</div>
 		
 		<ul class="tasks">
                   <% user =User.first(:id => get_userid) %>
-                  <% user.tasks.each do |task| %>
+                  <% user.tasks.reverse_each do |task| %>
                     <li>
-                      <input type="checkbox" /> <em><%= task.body %></em> <i></i> <span></span> 
+                      <input type="checkbox" /> <em><%= task.body %></em> <i></i>
+                      <span><%= task.release_date.strftime("%Y-%m-%d") %></span> 
                     </li>
                   <% end %>
 		</ul>
