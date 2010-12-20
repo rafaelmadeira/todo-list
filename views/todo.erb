@@ -57,7 +57,12 @@
                   <% user =User.first(:id => get_userid) %>
                   <% user.tasks.reverse_each do |task| %>
                     <li>
-                      <input type="checkbox" <% if task.status == true %>checked="checked"<% end %> /> <em><%= task.body %></em> <i></i>
+                      <input type="checkbox" 
+                        <% if task.status == true %>
+                          checked="checked"
+                        <% end %> 
+                      /> 
+                      <em><%= task.body %></em> <i></i>
                       <span><%= task.status %></span> 
                     </li>
                   <% end %>

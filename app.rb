@@ -129,7 +129,7 @@ end
 post '/task/new' do
   if logged_in?
     user = User.first(:id => get_userid)
-    task = Task.create(:user_id => user.id, :body => params[:body])
+    task = Task.create(:user_id => user.id, :body => params[:body], :status => params[:status])
     #add false
   else
     redirect '/login'
