@@ -56,7 +56,7 @@
 		<ul class="tasks">
                   <% user =User.first(:id => get_userid) %>
                   <% user.tasks.reverse_each do |task| %>
-                    <li>
+                    <%= "<li id=\"#{task.id}\" >" %>
                       <input type="checkbox" 
                         <% if task.status == true %>
                           checked="checked"
