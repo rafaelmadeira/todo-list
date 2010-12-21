@@ -4,14 +4,19 @@
                       $('ul.tasks input:checked').next().addClass('strike');
               });
               $('ul.tasks input').click(function() {
-                      $(this).next().addClass('strike');
                       if (!$(this).attr('checked')) {
                               $(this).next().removeClass('strike');
+                              $.post("task/new",  { id: $(this).parent().attr('id'), status: false }); // task/update ? sql needed
+                      }
+                      else {
+                              $(this).next().addClass('strike');
+                              $.post("task/new",  { id: $(this).parent().attr('id'), status: true });
                       }
           });
               $('ul.tasks i').click(function() {
-              $(this).parent().remove();
-      });
+                $(this).parent().remove();
+                $.post("task/new",  { id: $(this).parent().attr('id') }); // task/del ? sql needed
+                });
       $('ul.tasks li').hover(function(e) {
             e.preventDefault();
             $(this).find('i').addClass('delete');
@@ -32,7 +37,7 @@
                               release = $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 }).val();
                               $.post("task/new",  { body: $(this).prev().prev().val(), 
                                                     /*release_date.strftime("%Y-%m-%d"): release,*/
-                                                    status: true });
+                                                    status: false });
                               $('#error').hide();
                               $('ul.tasks').prepend(task);
                               $('ul.tasks li:first span').html($(this).prev().val());
@@ -56,7 +61,7 @@
 		<ul class="tasks">
                   <% user =User.first(:id => get_userid) %>
                   <% user.tasks.reverse_each do |task| %>
-                    <li id="<%= task.id %>" >
+                    <li id="<%= task.id %>">
                       <input type="checkbox" 
                         <% if task.status == true %>
                           checked="checked"
