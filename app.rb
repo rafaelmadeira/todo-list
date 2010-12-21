@@ -73,7 +73,7 @@ class Task
 
   property :id,           Serial
   property :body,         Text,     :required => true
-  #property :release_date, DateTime
+  property :release_date, Date
   property :created_at,   DateTime
   property :status,       Boolean,  :default => false
 
@@ -90,7 +90,6 @@ DataMapper.auto_upgrade!
 # Show an index page
 get '/' do
   if logged_in?
-    #user = User.first(:id => get_userid)
     erb :todo
   else
     redirect '/login'
@@ -129,7 +128,13 @@ end
 post '/task/new' do
   if logged_in?
     user = User.first(:id => get_userid)
-    task = Task.create(:user_id => user.id, :body => params[:body], :status => params[:status])
+    if params[:release_date].empty?
+      puts params
+      task = Task.create(:user_id => user.id, :body => params[:body], :release_date => '3000-10-10', :status => params[:status])
+    else
+      puts "rprprp"
+      task = Task.create(:user_id => user.id, :body => params[:body], :release_date => params[:release_date], :status => params[:status])
+    end
     #add false
   else
     redirect '/login'

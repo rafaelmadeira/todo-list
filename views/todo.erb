@@ -36,7 +36,7 @@
                               }
                               release = $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 }).val();
                               $.post("task/new",  { body: $(this).prev().prev().val(), 
-                                                    /*release_date.strftime("%Y-%m-%d"): release,*/
+                                                    release_date: release,
                                                     status: false });
                               $('#error').hide();
                               $('ul.tasks').prepend(task);
@@ -68,7 +68,7 @@
                         <% end %> 
                       /> 
                       <em><%= task.body %></em> <i></i>
-                      <span><%= task.status %></span> 
+                      <span><%= task.release_date if task.release_date.to_s != '3000-10-10' %></span> 
                     </li>
                   <% end %>
 		</ul>
