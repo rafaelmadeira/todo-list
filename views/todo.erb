@@ -6,16 +6,16 @@
               $('ul.tasks input').click(function() {
                       if (!$(this).attr('checked')) {
                               $(this).next().removeClass('strike');
-                              $.post("task/new",  { id: $(this).parent().attr('id'), status: false }); // task/update ? sql needed
+                              $.post("task/update",  { id: $(this).parent().attr('id'), status: false }); // task/update ? sql needed
                       }
                       else {
                               $(this).next().addClass('strike');
-                              $.post("task/new",  { id: $(this).parent().attr('id'), status: true });
+                              $.post("task/update",  { id: $(this).parent().attr('id'), status: true });
                       }
           });
               $('ul.tasks i').click(function() {
                 $(this).parent().remove();
-                $.post("task/new",  { id: $(this).parent().attr('id') }); // task/del ? sql needed
+                $.post("task/delete",  { id: $(this).parent().attr('id') }); // task/del ? sql needed
                 });
       $('ul.tasks li').hover(function(e) {
             e.preventDefault();

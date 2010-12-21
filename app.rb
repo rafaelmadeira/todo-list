@@ -136,6 +136,26 @@ post '/task/new' do
   end
 end
 
+post '/task/update' do
+  if logged_in?
+    user = User.first(:id => get_userid)
+    task = user.tasks.first(:id => params[:id])
+    task.update( :status => params[:status]) unless task.nil?
+  else
+    redirect '/login'
+  end
+end
+
+post '/task/delete' do
+  if logged_in?
+    user = User.first(:id => get_userid)
+    task = user.tasks.first(:id => params[:id])
+    task.destroy
+  else
+    redirect '/login'
+  end
+end
+
 # Catch any URL that wasn't already handled and show a 404 page
 get '/*' do
   erb :notfound
