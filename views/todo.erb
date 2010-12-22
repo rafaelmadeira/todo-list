@@ -6,7 +6,7 @@
               $('ul.tasks input').click(function() {
                       if (!$(this).attr('checked')) {
                               $(this).next().removeClass('strike');
-                              $.post("task/update",  { id: $(this).parent().attr('id'), status: false }); // task/update ? sql needed
+                              $.post("task/update",  { id: $(this).parent().attr('id'), status: false });
                       }
                       else {
                               $(this).next().addClass('strike');
@@ -15,7 +15,7 @@
           });
               $('ul.tasks i').click(function() {
                 $(this).parent().remove();
-                $.post("task/delete",  { id: $(this).parent().attr('id') }); // task/del ? sql needed
+                $.post("task/delete",  { id: $(this).parent().attr('id') });
                 });
       $('ul.tasks li').hover(function(e) {
             e.preventDefault();
@@ -27,7 +27,7 @@
       }
 	
       $(function() {
-              $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', minDate: 0 });
+              $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', });
               var task = '<li><input type="checkbox" class="test" /> <em></em> <i></i><span></span></li>';
                       $('span.new-task').click(function() {
                               if ($(this).prev().prev().val() == '') {
@@ -47,6 +47,25 @@
                   });
               check();
           });
+
+          $(document).ready(function() {
+            $('ul.tasks li').each(function() {
+            var parts = $(this).find('span').text().split('-');
+                if (parts != '') {
+                    var current = new Date();
+                    var today = new Date(current.getFullYear(), current.getMonth(), current.getDate());
+                    var deadline = new Date(parts[0], parts[1]-1, parts[2]);
+                    var diff =  Math.floor((today - deadline) / 86400000);
+                    var box = !$(this).children().attr('checked');
+                    if (parts != '' && diff > 0 && box) {
+                        $(this).insertBefore('ul.tasks li:first');
+                        if ( diff >= 1 && diff < 3) { $(this).addClass('delay1'); }
+                        else if ( diff > 2 && diff <= 5) { $(this).addClass('delay2'); }
+                        else if ( diff >= 6 ){ $(this).addClass('delay3'); }
+                    }
+                }
+            });  
+            });
     </script>
 	
 	<div id="wrapper">

@@ -130,3 +130,7 @@ ul.tasks li i {
 }
 
 .delete { visibility: visible !important; }
+
+.delay1 { background: #F4EAEA; }
+.delay2 { background: #F4D8D7; }
+.delay3 { background: #F5C4C2; }
