@@ -155,7 +155,7 @@ post '/task/delete' do
   if logged_in?
     user = User.first(:id => get_userid)
     task = user.tasks.first(:id => params[:id])
-    task.destroy
+    task.destroy unless task.nil?
   else
     redirect '/login'
   end
