@@ -27,7 +27,7 @@
       }
 	
       $(function() {
-              $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', });
+              $('.date-pick').datepicker({ dateFormat: 'yy-mm-dd', minDate: 0, });
               var task = '<li><input type="checkbox" class="test" /> <em></em> <i></i><span></span></li>';
                       $('span.new-task').click(function() {
                               if ($(this).prev().prev().val() == '') {
@@ -40,8 +40,8 @@
                                                     status: false });
                               $('#error').hide();
                               $('ul.tasks').prepend(task);
-                              $('ul.tasks li:first span').html($(this).prev().val());
-                              $('ul.tasks li:first em').html($(this).prev().prev().val());
+                              $('ul.tasks li:first span').text($(this).prev().val());
+                              $('ul.tasks li:first em').text($(this).prev().prev().val());
                               $(this).prev().prev().val('');
                               check();
                   });
