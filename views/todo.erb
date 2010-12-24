@@ -86,7 +86,7 @@
                           checked="checked"
                         <% end %> 
                       /> 
-                      <em><%= task.body %></em> <i></i>
+                      <em><%= h task.body %></em> <i></i>
                       <span><%= task.release_date if task.release_date.to_s != '3000-10-10' %></span> 
                     </li>
                   <% end %>
